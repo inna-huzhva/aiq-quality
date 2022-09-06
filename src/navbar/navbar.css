@@ -1,0 +1,22 @@
+.navbar {
+  background: #004953;
+  display: flex;
+  font-family: "Trirong", serif;
+  height: 44px;
+}
+
+.navbar>* {
+  color: whitesmoke;
+  padding: 10px 40px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.navbar>*:hover {
+  background-color: #001f23;
+}
+
+.navbar .city-select {
+  background: #004953;
+  margin-left: auto;
+}

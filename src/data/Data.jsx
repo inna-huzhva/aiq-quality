@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./data.css";
 
 function findPol(pollutants, code) {
   return pollutants.find(p => p.pol === code)?.value;
@@ -21,7 +22,7 @@ function Data() {
   }, []);
 
   return (
-    <div>
+    <div className="data">
       {data.status === "loading" && <h5>Loading...</h5>}
       {data.status === "error" && (
         <h1 style={{ color: "maroon" }}>
