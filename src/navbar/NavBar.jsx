@@ -2,17 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 
-function NavBar() {
+function NavBar({ cities, city, selectCity }) {
+  function handleSelect(e) {
+    selectCity(e.target.value);
+  }
   return (
     <nav className="navbar">
       <Link to="/">Map</Link>
       <Link to="/data">Data</Link>
       <Link to="/history">History</Link>
       <div className="city-select">
-        <select>
-          <option>Kyiv</option>
-          <option>Kremenchuk</option>
-          <option>Kryvyi Rih</option>
+        <select value={city} onChange={handleSelect}>
+          {cities.map(c => (
+            <option key={c} value={c}>{c}</option>
+          ))}
         </select>
       </div>
     </nav>
