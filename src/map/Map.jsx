@@ -1,5 +1,6 @@
 import React from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import Station from "./Station.jsx";
 import "./map.css";
 
 function ChangeView({ center }) {
@@ -8,7 +9,7 @@ function ChangeView({ center }) {
   return null;
 }
 
-function Map({ city }) {
+function Map({ city, data }) {
   return (
     <div className="map">
       <MapContainer center={city.center} zoom={10} scrollWheelZoom={true}>
@@ -17,11 +18,9 @@ function Map({ city }) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <ChangeView center={city.center} />
-        <Marker position={[50.45466, 30.5238]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+        {data.map(s => (
+          <Station key={s.id} data={s} />
+        ))}
       </MapContainer>
     </div>
   );
