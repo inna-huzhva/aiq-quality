@@ -38,6 +38,15 @@ module.exports = {
     }),
   ],
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      rewrites: [
+        {
+          from: /^\/api/,
+          to: function (context) {
+            return context.request.url;
+          }
+        },
+      ],
+    },
   },
 };

@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useCities } from "./cities.jsx";
-import { useData } from "./data/useData.jsx";
+import { useCities } from "./useCities.jsx";
 import NavBar from "./navbar/NavBar.jsx";
 import Map from "./map/Map.jsx";
 import Data from "./data/Data.jsx";
@@ -12,24 +11,25 @@ function NotFound() {
 };
 
 function App() {
-  const [cityNames, city, selectCity] = useCities();
-  const data = useData();
+  const [isLoading, error, cityNames, city, selectCity] = useCities();
 
   return (
     <BrowserRouter>
-      <NavBar cities={cityNames} city={city.name} selectCity={selectCity} />
-      {data.status === "loading" && <h5>Loading...</h5>}
-      {data.status === "error" && (
+      {isLoading && <h5>Loading...</h5>}
+      {error && (
         <h1 style={{ color: "maroon" }}>
-          Error happened! {data.error}
+          Error happened when loading cities! {error}
         </h1>
       )}
-      {data.status === "success" && (
-        <Routes>
-          <Route path="/" element={<Map city={city} data={data.data} />} />
-          <Route path="data" element={<Data data={data.data} />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+      {(!isLoading && !error) && (
+        <>
+          <NavBar cities={cityNames} city={city.name} selectCity={selectCity} />
+          <Routes>
+            <Route path="/" element={<Map city={city} />} />
+            <Route path="data" element={<Data />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </>
       )}
     </BrowserRouter>
   );
