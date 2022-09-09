@@ -12,7 +12,7 @@ function Station({ data: { latitude, longitude, stationName, aqi, moment } }) {
         fillOpacity: 0.5
       }}
     >
-      <Popup>
+      <Popup closeButton={false}>
         {stationName} {aqi} {moment}
       </Popup>
     </CircleMarker>

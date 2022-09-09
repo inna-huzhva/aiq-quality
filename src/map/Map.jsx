@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import { useMap as useMapLoading } from "./useMap.jsx";
 import Station from "./Station.jsx";
@@ -6,6 +6,9 @@ import "./map.css";
 
 function ChangeView({ center }) {
   const map = useMap();
+  useEffect(() => {
+    map.closePopup();
+  });
   map.setView(center);
   return null;
 }
