@@ -26,7 +26,7 @@ function App() {
           <NavBar cities={cityNames} city={city.name} selectCity={selectCity} />
           <Routes>
             <Route path="/" element={<Map city={city} />} />
-            <Route path="data" element={<Data />} />
+            <Route path="data" element={<Data city={city} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </>

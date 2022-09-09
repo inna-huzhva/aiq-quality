@@ -10,7 +10,7 @@ function pa2mmhg(p) {
   return p ? (p / 133.322).toFixed() : undefined;
 }
 
-function Data() {
+function Data({ city }) {
   const data = useData();
   return (
     <div className="data">
@@ -35,18 +35,20 @@ function Data() {
             </tr>
           </thead>
           <tbody>
-            {data.data.map(s => (
-              <tr key={s.id}>
-                <td>{s.cityName}</td>
-                <td>{s.stationName}</td>
-                <td>{s.latitude}, {s.longitude}</td>
-                <td>{findMeasurement(s.latestMeasurements, "pm25")}</td>
-                <td>{findMeasurement(s.latestMeasurements, "pm10")}</td>
-                <td>{findMeasurement(s.latestMeasurements, "temperature")}</td>
-                <td>{findMeasurement(s.latestMeasurements, "humidity")}</td>
-                <td>{pa2mmhg(findMeasurement(s.latestMeasurements, "pressure_pa"))}</td>
-              </tr>
-            ))}
+            {data.data
+              .filter(e => e.cityName === city.name)
+              .map(s => (
+                <tr key={s.id}>
+                  <td>{s.cityName}</td>
+                  <td>{s.stationName}</td>
+                  <td>{s.latitude}, {s.longitude}</td>
+                  <td>{findMeasurement(s.latestMeasurements, "pm25")}</td>
+                  <td>{findMeasurement(s.latestMeasurements, "pm10")}</td>
+                  <td>{findMeasurement(s.latestMeasurements, "temperature")}</td>
+                  <td>{findMeasurement(s.latestMeasurements, "humidity")}</td>
+                  <td>{pa2mmhg(findMeasurement(s.latestMeasurements, "pressure_pa"))}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       )}
