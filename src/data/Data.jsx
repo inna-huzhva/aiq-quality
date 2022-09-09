@@ -1,8 +1,8 @@
 import React from "react";
 import "./data.css";
 
-function findPol(pollutants, code) {
-  return pollutants.find(p => p.pol === code)?.value;
+function findMeasurement(measurements, code) {
+  return measurements.find(p => p.phenomenon === code)?.value;
 }
 
 function Data({ data }) {
@@ -18,8 +18,7 @@ function Data({ data }) {
             <th>PM10, ug/m3</th>
             <th>Temperature, Celcius</th>
             <th>Humidity, %</th>
-            <th>Pressure, hPa</th>
-            <th>Air Quality Index, aqi</th>
+            <th>Pressure, hPa FIX ME!!!</th>
           </tr>
         </thead>
         <tbody>
@@ -28,12 +27,11 @@ function Data({ data }) {
               <td>{s.cityName}</td>
               <td>{s.stationName}</td>
               <td>{s.latitude}, {s.longitude}</td>
-              <td>{findPol(s.pollutants, "PM2.5")}</td>
-              <td>{findPol(s.pollutants, "PM10")}</td>
-              <td>{findPol(s.pollutants, "Temperature")}</td>
-              <td>{findPol(s.pollutants, "Humidity")}</td>
-              <td>{findPol(s.pollutants, "Pressure")}</td>
-              <td>{findPol(s.pollutants, "Air Quality Index")}</td>
+              <td>{findMeasurement(s.latestMeasurements, "pm25")}</td>
+              <td>{findMeasurement(s.latestMeasurements, "pm10")}</td>
+              <td>{findMeasurement(s.latestMeasurements, "temperature")}</td>
+              <td>{findMeasurement(s.latestMeasurements, "humidity")}</td>
+              <td>{findMeasurement(s.latestMeasurements, "pressure_pa")}</td>
             </tr>
           ))}
         </tbody>

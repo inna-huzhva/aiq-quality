@@ -4,7 +4,7 @@ export function useData() {
   const [data, setData] = useState({ status: "loading" });
 
   useEffect(() => {
-    fetch("/data.json")
+    fetch("/api/stations")
       .then((response) => {
         if (!response.ok) {
           setData({ status: "error", error: response.statusText });

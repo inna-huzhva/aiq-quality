@@ -1,12 +1,12 @@
 import React from "react";
 import { CircleMarker, Popup } from "react-leaflet";
 
-function findPollutant(pollutants, code) {
-  return pollutants.find(p => p.pol === code);
+function findMeasurement(measurements, code) {
+  return measurements.find(p => p.phenomenon === code);
 }
 
-function Station({ data: { latitude, longitude, stationName, pollutants } }) {
-  const aqi = findPollutant(pollutants, "Air Quality Index");
+function Station({ data: { latitude, longitude, stationName, latestMeasurements } }) {
+  const aqi = findMeasurement(latestMeasurements, "pm25");
   return (
     <CircleMarker
       center={[latitude, longitude]}
@@ -18,7 +18,7 @@ function Station({ data: { latitude, longitude, stationName, pollutants } }) {
       }}
     >
       <Popup>
-        {stationName} {aqi?.value} {aqi?.time}
+        {stationName} {aqi?.value} {aqi?.moment}
       </Popup>
     </CircleMarker>
   );
