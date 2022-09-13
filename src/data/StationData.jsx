@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { useStationData } from "./useData.jsx";
 
@@ -6,7 +6,15 @@ function formatDate(d) {
   return new Date(d).toLocaleString("uk");
 }
 
+const phenomenons = [
+  "pm25", 'pm10', 'pm1', 'humidity', 'temperature', 'pressure_pa'
+];
+
 function Station({ station }) {
+  const [phenomenonFilter, setPhenomenonFilter] = useState(phenomenons[0]);
+  function selectPhenomenonFilter(e) {
+    setPhenomenonFilter(e.target.value);
+  }
   return (
     <div className="station">
       <div className="info">
@@ -14,6 +22,14 @@ function Station({ station }) {
         <div>City: {station.cityName}</div>
         <div>Station name: {station.stationName}</div>
         <div>Location: {station.latitude}, {station.longitude}</div>
+      </div>
+      <div className="options">
+        <label>Phenomenon: </label>
+        <select value={phenomenonFilter} onChange={selectPhenomenonFilter}>
+          {phenomenons.map(p => (
+            <option key={p}>{p}</option>
+          ))}
+        </select>
       </div>
       <div className="history">
         <table>
@@ -25,13 +41,15 @@ function Station({ station }) {
             </tr>
           </thead>
           <tbody>
-            {station.measurements.map(m => (
-              <tr key={`${m.phenomenon}-${m.moment}`}>
-                <td>{m.phenomenon}</td>
-                <td>{formatDate(m.moment)}</td>
-                <td>{m.value}</td>
-              </tr>
-            ))}
+            {station.measurements
+              .filter(m => m.phenomenon === phenomenonFilter)
+              .map(m => (
+                <tr key={`${m.phenomenon}-${m.moment}`}>
+                  <td>{m.phenomenon}</td>
+                  <td>{formatDate(m.moment)}</td>
+                  <td>{m.value}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

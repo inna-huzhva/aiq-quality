@@ -26,6 +26,10 @@
   margin-top: 20px;
 }
 
+.station-page .station .options {
+  margin-top: 10px;
+}
+
 .history table {
   border: 1px solid black;
   border-collapse: collapse;
