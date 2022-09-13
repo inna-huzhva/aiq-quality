@@ -9,3 +9,31 @@
   border: 1px solid black;
   padding: 2px 5px;
 }
+
+.station-page {
+  background-color: #eee;
+  box-shadow: 0 0 10px #777;
+  width: 1000px;
+  margin: 0 auto;
+  padding: 5px 15px;
+}
+
+.station-page .back-link {
+  margin-top: 10px;
+}
+
+.station-page .station {
+  margin-top: 20px;
+}
+
+.history table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin: 20px 10px;
+}
+
+.history th,
+.history td {
+  border: 1px solid black;
+  padding: 2px 15px;
+}
