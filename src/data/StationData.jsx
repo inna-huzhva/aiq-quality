@@ -2,6 +2,10 @@ import React from "react";
 import { Link, useParams } from 'react-router-dom';
 import { useStationData } from "./useData.jsx";
 
+function formatDate(d) {
+  return new Date(d).toLocaleString("uk");
+}
+
 function Station({ station }) {
   return (
     <div className="station">
@@ -24,7 +28,7 @@ function Station({ station }) {
             {station.measurements.map(m => (
               <tr key={`${m.phenomenon}-${m.moment}`}>
                 <td>{m.phenomenon}</td>
-                <td>{m.moment}</td>
+                <td>{formatDate(m.moment)}</td>
                 <td>{m.value}</td>
               </tr>
             ))}
@@ -41,7 +45,7 @@ function StationData() {
   return (
     <div className="station-page">
       <div className="back-link">
-        <Link to="..">Back</Link>
+        <Link to="..">All stations</Link>
       </div>
       {data.status === "loading" && <h5>Loading...</h5>}
       {data.status === "error" && (
