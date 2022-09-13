@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import { CircleMarker, Popup } from "react-leaflet";
 
 function categorizeSpot(aqi) {
@@ -24,7 +25,7 @@ function formatDate(d) {
   return d && new Date(d).toLocaleString("uk");
 }
 
-function Station({ data: { latitude, longitude, stationName, aqi, moment } }) {
+function Station({ data: { id, latitude, longitude, stationName, aqi, moment } }) {
   const [color, fillColor, status] = categorizeSpot(aqi);
   return (
     <CircleMarker
@@ -46,6 +47,7 @@ function Station({ data: { latitude, longitude, stationName, aqi, moment } }) {
             <div>Address: {stationName}</div>
             <div>Last measured: {formatDate(moment)}</div>
           </div>
+          <Link to={`/data/${id}`}>History</Link>
         </div>
       </Popup>
     </CircleMarker>
