@@ -10,7 +10,6 @@ function NavBar({ cities, city, selectCity }) {
     <nav className="navbar">
       <Link to="/">Map</Link>
       <Link to="/data">Data</Link>
-      <Link to="/history">History</Link>
       <div className="city-select">
         <select value={city} onChange={handleSelect}>
           {cities.map(c => (

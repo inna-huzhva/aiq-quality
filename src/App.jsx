@@ -4,6 +4,7 @@ import { useCities } from "./useCities.jsx";
 import NavBar from "./navbar/NavBar.jsx";
 import Map from "./map/Map.jsx";
 import Data from "./data/Data.jsx";
+import StationData from "./data/StationData.jsx";
 import "./normalize.css"
 
 function NotFound() {
@@ -26,7 +27,10 @@ function App() {
           <NavBar cities={cityNames} city={city.name} selectCity={selectCity} />
           <Routes>
             <Route path="/" element={<Map city={city} />} />
-            <Route path="data" element={<Data city={city} />} />
+            <Route path="data">
+              <Route index element={<Data city={city} />} />
+              <Route path=":stationId" element={<StationData />} />
+            </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </>

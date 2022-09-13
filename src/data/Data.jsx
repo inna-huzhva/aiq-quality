@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useData } from "./useData.jsx";
 import "./data.css";
 
@@ -32,6 +33,7 @@ function Data({ city }) {
               <th>Temperature, C</th>
               <th>Humidity, %</th>
               <th>Pressure, mmHg</th>
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -47,6 +49,7 @@ function Data({ city }) {
                   <td>{findMeasurement(s.latestMeasurements, "temperature")}</td>
                   <td>{findMeasurement(s.latestMeasurements, "humidity")}</td>
                   <td>{pa2mmhg(findMeasurement(s.latestMeasurements, "pressure_pa"))}</td>
+                  <td><Link to={s.id.toString()}>History</Link></td>
                 </tr>
               ))}
           </tbody>
