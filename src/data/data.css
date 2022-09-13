@@ -30,6 +30,19 @@
   margin-top: 10px;
 }
 
+.station-page .station .options>div {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.station-page .station .options .sorting label {
+  margin-right: 10px;
+}
+
+.station-page .station .options .sorting input {
+  margin-right: 5px;
+}
+
 .history table {
   border: 1px solid black;
   border-collapse: collapse;

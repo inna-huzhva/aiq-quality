@@ -10,11 +10,22 @@ const phenomenons = [
   "pm25", 'pm10', 'pm1', 'humidity', 'temperature', 'pressure_pa'
 ];
 
+function compareMomentsAsc(a, b) {
+  if (a.moment === b.moment)
+    return 0;
+  if (a.moment < b.moment)
+    return -1;
+  return 1;
+}
+
+function compareMomentsDesc(a, b) {
+  return -compareMomentsAsc(a, b)
+}
+
 function Station({ station }) {
   const [phenomenonFilter, setPhenomenonFilter] = useState(phenomenons[0]);
-  function selectPhenomenonFilter(e) {
-    setPhenomenonFilter(e.target.value);
-  }
+  const [sortOrder, setSortOrder] = useState("desc");
+  const sortFn = sortOrder === "asc" ? compareMomentsAsc : compareMomentsDesc;
   return (
     <div className="station">
       <div className="info">
@@ -24,12 +35,28 @@ function Station({ station }) {
         <div>Location: {station.latitude}, {station.longitude}</div>
       </div>
       <div className="options">
-        <label>Phenomenon: </label>
-        <select value={phenomenonFilter} onChange={selectPhenomenonFilter}>
-          {phenomenons.map(p => (
-            <option key={p}>{p}</option>
-          ))}
-        </select>
+        <div>
+          <label>Phenomenon: </label>
+          <select value={phenomenonFilter} onChange={e => setPhenomenonFilter(e.target.value)}>
+            {phenomenons.map(p => (
+              <option key={p}>{p}</option>
+            ))}
+          </select>
+        </div>
+        <div className="sorting">
+          <label>
+            <input
+              type="radio"
+              checked={sortOrder === "desc"}
+              onChange={() => setSortOrder("desc")}
+            />Newest first</label>
+          <label>
+            <input
+              type="radio"
+              checked={sortOrder === "asc"}
+              onChange={() => setSortOrder("asc")}
+            />Oldest first</label>
+        </div>
       </div>
       <div className="history">
         <table>
@@ -42,6 +69,8 @@ function Station({ station }) {
           </thead>
           <tbody>
             {station.measurements
+              .slice()
+              .sort(sortFn)
               .filter(m => m.phenomenon === phenomenonFilter)
               .map(m => (
                 <tr key={`${m.phenomenon}-${m.moment}`}>
