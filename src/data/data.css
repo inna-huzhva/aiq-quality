@@ -1,3 +1,7 @@
+.data {
+  overflow-x: auto;
+}
+
 .data table {
   border: 1px solid black;
   border-collapse: collapse;
@@ -13,7 +17,7 @@
 .station-page {
   background-color: #eee;
   box-shadow: 0 0 10px #777;
-  width: 1000px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 5px 15px;
 }
@@ -26,13 +30,10 @@
   margin-top: 20px;
 }
 
-.station-page .station .options {
-  margin-top: 10px;
-}
-
 .station-page .station .options>div {
   display: inline-block;
   margin-right: 30px;
+  margin-top: 10px;
 }
 
 .station-page .station .options .sorting label {
@@ -43,10 +44,14 @@
   margin-right: 5px;
 }
 
+.history {
+  overflow-x: auto;
+}
+
 .history table {
   border: 1px solid black;
   border-collapse: collapse;
-  margin: 20px 10px;
+  margin: 20px 0;
 }
 
 .history th,

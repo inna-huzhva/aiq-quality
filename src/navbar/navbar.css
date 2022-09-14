@@ -7,9 +7,15 @@
 
 .navbar>* {
   color: whitesmoke;
-  padding: 10px 40px;
+  padding: 12px 40px;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+@media screen and (max-width: 720px) {
+  .navbar>* {
+    padding: 12px 20px;
+  }
 }
 
 .navbar>*:hover {
@@ -19,4 +25,5 @@
 .navbar .city-select {
   background: #004953;
   margin-left: auto;
+  padding: 10px;
 }
